@@ -1,5 +1,7 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.JsonToWebElementConverter;
+
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.util.ArrayList;
@@ -47,9 +49,32 @@ public class Liker {
         address.add("https://www.youtube.com/watch?v=Kde1-uKhhBU");// Утренняя разминка (46);
 
         //System.setProperty("webDriver.chrome.driver", "Selenium\\chromedriver.exe"); //системная настройка
-        for (int i = 0; i < 10; i++) { //запускаем 10 потоков с интервалом 25 секунд
-            new Watcher(address).start();
-            Thread.sleep(25000);
+        Thread threads[] = new Thread[10]; //создаём массив на 10 элементов
+
+        for (int i = 0; i < threads.length; i++) { //создаём потоки
+            Thread thread = new Watcher(address);
+            threads[i] = thread; //и складываем потоки в массив threads
+            thread.start();
+            Thread.sleep(15000); //с интервалом 15 секунд
+        }
+        System.out.println("Потоки созданы и запущены");
+
+        while (true){ //запускаем бесконечный цикл
+            Thread.sleep(100000); //с интервалом 100 секунд
+            System.out.println("Самосканирование запущено:");
+                        for (int j=0; j<threads.length; j++) {
+                            System.out.print("\r" + (j+1)*10 + "%");
+                if (!threads[j].isAlive()) //проверяем поток на живость
+                {
+                    System.out.println("Поток " + threads[j].getName() + " мёртв");
+                    threads[j].interrupt(); //прерываем поток
+                    Thread thread = new Watcher(address); //создаём новый поток
+                    threads[j] = thread; // кладём новый поток в массив
+                    System.out.println("Запускаем новый поток " + thread.getName());
+                    thread.start();//запускаем новый поток
+                }
+            }
+                System.out.println("все потоки живы");
         }
     }
 
@@ -79,7 +104,7 @@ public class Liker {
                 driver.manage().window().minimize(); //прячем окно
                 System.out.println(Thread.currentThread().getName() + " смотрит ролик "+ index);
                 try {
-                    Thread.sleep(90000); //смотрим ролик 90 секунд
+                    Thread.sleep(180000); //смотрим ролик 180 секунд
                 } catch (InterruptedException e) {
                     continue;
                 }
@@ -111,30 +136,30 @@ public class Liker {
         Thread.sleep(500);
         robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 
-        robot1.mouseMove(755, 670);
-        Thread.sleep(1000);
-        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //переходим в настройки
-        //System.out.println("переходим в настройки");
-        Thread.sleep(500);
-        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+//        robot1.mouseMove(755, 670);
+//        Thread.sleep(1000);
+//        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //переходим в настройки
+//        //System.out.println("переходим в настройки");
+//        Thread.sleep(500);
+//        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+//
+//        robot1.mouseMove(755, 520);
+//        Thread.sleep(1000);
+//        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //переходим к выбору скорости
+//        Thread.sleep(500);
+//        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 
-        robot1.mouseMove(755, 520);
-        Thread.sleep(1000);
-        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //переходим к выбору скорости
-        Thread.sleep(500);
-        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-
-        robot1.mouseMove(965, 600);
-        Thread.sleep(1000);
-        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //двигаем ползунок вниз
-        Thread.sleep(500);
-        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-
-        robot1.mouseMove(900, 600);
-        Thread.sleep(1000);
-        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //выбираем двойную скорость
-        Thread.sleep(500);
-        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+//        robot1.mouseMove(965, 600);
+//        Thread.sleep(1000);
+//        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //двигаем ползунок вниз
+//        Thread.sleep(500);
+//        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+//
+//        robot1.mouseMove(900, 600);
+//        Thread.sleep(1000);
+//        robot1.mousePress(InputEvent.BUTTON1_DOWN_MASK); //выбираем двойную скорость
+//        Thread.sleep(500);
+//        robot1.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }
 }
 
