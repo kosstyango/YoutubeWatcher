@@ -58,24 +58,24 @@ public class Liker {
             Thread.sleep(15000); //с интервалом 15 секунд
         }
         System.out.println("Потоки созданы и запущены");
-
-        while (true){ //запускаем бесконечный цикл
-            Thread.sleep(100000); //с интервалом 100 секунд
-            System.out.println("Самосканирование запущено:");
-                        for (int j=0; j<threads.length; j++) {
-                            System.out.print("\r" + (j+1)*10 + "%");
-                if (!threads[j].isAlive()) //проверяем поток на живость
-                {
-                    System.out.println("Поток " + threads[j].getName() + " мёртв");
-                    threads[j].interrupt(); //прерываем поток
-                    Thread thread = new Watcher(address); //создаём новый поток
-                    threads[j] = thread; // кладём новый поток в массив
-                    System.out.println("Запускаем новый поток " + thread.getName());
-                    thread.start();//запускаем новый поток
-                }
-            }
-                System.out.println("все потоки живы");
-        }
+//
+//        while (true){ //запускаем бесконечный цикл
+//            Thread.sleep(100000); //с интервалом 100 секунд
+//            System.out.println("Самосканирование запущено:");
+//                        for (int j=0; j<threads.length; j++) {
+//                            System.out.print("\r" + (j+1)*10 + "%");
+//                if (!threads[j].isAlive()) //проверяем поток на живость
+//                {
+//                    System.out.println("Поток " + threads[j].getName() + " мёртв");
+//                    threads[j].interrupt(); //прерываем поток
+//                    Thread thread = new Watcher(address); //создаём новый поток
+//                    threads[j] = thread; // кладём новый поток в массив
+//                    System.out.println("Запускаем новый поток " + thread.getName());
+//                    thread.start();//запускаем новый поток
+//                }
+//            }
+//                System.out.println("все потоки живы");
+//        }
     }
 
     public static class Watcher extends Thread {
