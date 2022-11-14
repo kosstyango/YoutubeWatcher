@@ -43,10 +43,6 @@ public class Liker {
         address.add("https://www.youtube.com/watch?v=ZVwHbA4_GuA");// Slim marathon (69);
         address.add("https://www.youtube.com/watch?v=NMX6vigpZfc");// Утренняя зарядка 2 (99);
         address.add("https://www.youtube.com/watch?v=thmBZFe-XTU");// Сурья намаскар (36);
-        address.add("https://www.youtube.com/watch?v=xt5TpDD7VO8");// Пресс (44);
-        address.add("https://www.youtube.com/watch?v=Sezu8ZSULfM");// Пранаямы для реабилитации после вирусных заболеваний (42)
-        address.add("https://www.youtube.com/watch?v=U94P_QV8sek");// Комплекс для раскрытия тазобедренного сустава (41);
-        address.add("https://www.youtube.com/watch?v=Kde1-uKhhBU");// Утренняя разминка (46);
 
         //System.setProperty("webDriver.chrome.driver", "Selenium\\chromedriver.exe"); //системная настройка
         Thread threads[] = new Thread[10]; //создаём массив на 10 элементов
@@ -58,24 +54,24 @@ public class Liker {
             Thread.sleep(15000); //с интервалом 15 секунд
         }
         System.out.println("Потоки созданы и запущены");
-//
-//        while (true){ //запускаем бесконечный цикл
-//            Thread.sleep(100000); //с интервалом 100 секунд
-//            System.out.println("Самосканирование запущено:");
-//                        for (int j=0; j<threads.length; j++) {
-//                            System.out.print("\r" + (j+1)*10 + "%");
-//                if (!threads[j].isAlive()) //проверяем поток на живость
-//                {
-//                    System.out.println("Поток " + threads[j].getName() + " мёртв");
-//                    threads[j].interrupt(); //прерываем поток
-//                    Thread thread = new Watcher(address); //создаём новый поток
-//                    threads[j] = thread; // кладём новый поток в массив
-//                    System.out.println("Запускаем новый поток " + thread.getName());
-//                    thread.start();//запускаем новый поток
-//                }
-//            }
-//                System.out.println("все потоки живы");
-//        }
+
+        while (true){ //запускаем бесконечный цикл
+            Thread.sleep(100000); //с интервалом 100 секунд
+            System.out.println("Самосканирование запущено:");
+                        for (int j=0; j<threads.length; j++) {
+                            System.out.print("\r" + (j+1)*10 + "%");
+                if (!threads[j].isAlive()) //проверяем поток на живость
+                {
+                    System.out.println("Поток " + threads[j].getName() + " мёртв");
+                    threads[j].interrupt(); //прерываем поток
+                    Thread thread = new Watcher(address); //создаём новый поток
+                    threads[j] = thread; // кладём новый поток в массив
+                    System.out.println("Запускаем новый поток " + thread.getName());
+                    thread.start();//запускаем новый поток
+                }
+            }
+                System.out.println("все потоки живы");
+        }
     }
 
     public static class Watcher extends Thread {
