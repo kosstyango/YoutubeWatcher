@@ -82,7 +82,7 @@ public class Liker {
         surnames.add("Иванова");
 
         System.setProperty("webDriver.chrome.driver", "Selenium\\chromedriver.exe"); //системная настройка
-        for (int i = 3; i < 10; i++) { //запускаем цикл на 1 новых аккаунтов
+        for (int i = 1; i < 10; i++) { //запускаем цикл на 10 новых аккаунтов
             registration(names, surnames, i);
             Thread.sleep(30000);
         }
