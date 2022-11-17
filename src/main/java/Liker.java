@@ -9,10 +9,7 @@ import java.util.ArrayList;
 public class Liker {
     public static void main(String[] args) throws InterruptedException, AWTException {
         ArrayList<String> address = new ArrayList<>();
-        address.add("https://www.youtube.com/watch?v=yMZozCGKo7A");// Пранаямы (47);
-        address.add("https://www.youtube.com/watch?v=ykjToGfSzOk");// Слим марафон 3 (52);
-        address.add("https://www.youtube.com/watch?v=R0T_a5p7Rps");// Слим марафон 5 (52)
-        address.add("https://www.youtube.com/watch?v=oDhpQr4J-wY");// Слим марафон 6 (60);
+
         address.add("https://www.youtube.com/watch?v=1ljV4dqaSPA");// Гимнастика для глаз (72);
         address.add("https://www.youtube.com/watch?v=Kde1-uKhhBU");// Утренняя разминка (46);
         address.add("https://www.youtube.com/watch?v=5ssF3AM4Kd4");// Силовой комплекс на ноги и ягодицы;
@@ -45,7 +42,7 @@ public class Liker {
         address.add("https://www.youtube.com/watch?v=thmBZFe-XTU");// Сурья намаскар (36);
 
         //System.setProperty("webDriver.chrome.driver", "Selenium\\chromedriver.exe"); //системная настройка
-        Thread threads[] = new Thread[10]; //создаём массив на 10 элементов
+        Thread threads[] = new Thread[1]; //создаём массив на 10 элементов
 
         for (int i = 0; i < threads.length; i++) { //создаём потоки
             Thread thread = new Watcher(address);
